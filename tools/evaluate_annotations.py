@@ -97,7 +97,9 @@ def main() -> int:
         false_positive += len(student) - len(matched)
         false_negative += len(gold) - len(matched)
         overlaps.extend(matched)
-        per_image.append({"image": gold_file.stem, "gold_boxes": len(gold), "student_boxes": len(student), "matches": len(matched)})
+        per_image.append({"image": gold_file.stem, "gold_boxes": len(gold), "student_boxes": len(student), "matches": len(matched), "tp": len(matched),
+    "fp": len(student) - len(matched),
+    "fn": len(gold) - len(matched)})
 
     precision = true_positive / (true_positive + false_positive) if true_positive + false_positive else 0.0
     recall = true_positive / (true_positive + false_negative) if true_positive + false_negative else 0.0
